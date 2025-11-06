@@ -3,15 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
   env: {
-    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+    CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME || "test",
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "/api/:path*",
-      },
-    ];
+  experimental: {
+    serverComponentsExternalPackages: ["pg"],
   },
 };
 
