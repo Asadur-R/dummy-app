@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import PostForm from "@/components/PostForm";
+import PostForm from "../components/PostForm";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);

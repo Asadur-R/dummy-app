@@ -8,12 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init-db": "node scripts/init-db.js",
-    "heroku-postbuild": "npm run build && npm run init-db"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
-    "@cloudinary/react": "^1.14.3",
-    "@cloudinary/url-gen": "^1.22.0",
     "cloudinary": "^1.41.0",
     "dotenv": "^16.3.1",
     "next": "13.5.6",
