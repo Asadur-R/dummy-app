@@ -11,6 +11,7 @@
     "init-db": "node scripts/init-db.js",
     "heroku-postbuild": "npm run build",
     "test": "echo 'No tests yet' && exit 0"
+    
   },
   "dependencies": {
     "cloudinary": "^1.41.0",
