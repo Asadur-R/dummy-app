@@ -2,41 +2,46 @@ name: Deploy to Heroku
 
 on:
   push:
-    branches: [deployment]
+    branches: [ deployment ]
 
 jobs:
   deploy:
     name: Deploy to Heroku
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Create environment file for build
-        run: |
-          echo "DATABASE_URL=postgresql://test:test@localhost/test" >> .env.local
-          echo "CLOUDINARY_CLOUD_NAME=test" >> .env.local
-          echo "CLOUDINARY_API_KEY=test" >> .env.local
-          echo "CLOUDINARY_API_SECRET=test" >> .env.local
-          echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=test" >> .env.local
-
-      - name: Build application
-        run: npm run build
-
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "dummy-ap"
-          heroku_email: "asad.rehman@aurorasolutions.io"
-          branch: "deployment"
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Create environment file for build
+      run: |
+        echo "DATABASE_URL=postgresql://test:test@localhost/test" >> .env.local
+        echo "CLOUDINARY_CLOUD_NAME=test" >> .env.local
+        echo "CLOUDINARY_API_KEY=test" >> .env.local
+        echo "CLOUDINARY_API_SECRET=test" >> .env.local
+        echo "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=test" >> .env.local
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Deploy to Heroku via Git
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: |
+        # Install Heroku CLI
+        curl https://cli-assets.heroku.com/install.sh | sh
+        
+        # Add Heroku remote
+        git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/dummy-ap.git
+        
+        # Push to Heroku (force push to overwrite any conflicts)
+        git push --force heroku HEAD:main
