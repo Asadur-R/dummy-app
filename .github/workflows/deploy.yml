@@ -5,8 +5,8 @@ on:
     branches: [deployment]
 
 jobs:
-  test-build:
-    name: Test and Build
+  deploy:
+    name: Deploy to Heroku
     runs-on: ubuntu-latest
 
     steps:
@@ -33,24 +33,10 @@ jobs:
       - name: Build application
         run: npm run build
 
-  deploy:
-    name: Deploy to Heroku
-    runs-on: ubuntu-latest
-    needs: test-build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Heroku CLI
+      - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "dummy-ap"
           heroku_email: "asad.rehman@aurorasolutions.io"
-          justlogin: true
-
-      - name: Deploy to Heroku
-        run: |
-          git remote add heroku https://git.heroku.com/dummy-ap.git
-          git push heroku deployment:main
+          branch: "deployment"
