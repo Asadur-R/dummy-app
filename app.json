@@ -1,0 +1,40 @@
+{
+  "name": "Dummy Next.js App",
+  "description": "A dummy Next.js app with Cloudinary and Neon DB",
+  "repository": "https://github.com/Asadur-R/dummy-app",
+  "logo": "https://nextjs.org/static/favicon/favicon.ico",
+  "keywords": ["node", "nextjs", "react", "postgresql", "cloudinary"],
+  "env": {
+    "CLOUDINARY_CLOUD_NAME": {
+      "description": "Your Cloudinary cloud name",
+      "required": true
+    },
+    "CLOUDINARY_API_KEY": {
+      "description": "Your Cloudinary API key",
+      "required": true
+    },
+    "CLOUDINARY_API_SECRET": {
+      "description": "Your Cloudinary API secret",
+      "required": true
+    },
+    "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME": {
+      "description": "Your Cloudinary cloud name (public)",
+      "required": true
+    },
+    "DATABASE_URL": {
+      "description": "Your Neon PostgreSQL connection string",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  }
+}
