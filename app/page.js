@@ -97,7 +97,7 @@ export default function Home() {
   if (loading) {
     return (
       <div className="container">
-        <h1>Cloudinary + Neon DB Demo</h1>
+        <h1>Dummy DB Demo</h1>
         <p>Loading...</p>
       </div>
     );
@@ -105,7 +105,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1>Cloudinary + Neon DB Demo</h1>
+      <h1>Dummy DB Demo</h1>
 
       <div className="grid">
         <div className="section">
